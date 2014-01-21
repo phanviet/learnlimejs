@@ -1,12 +1,14 @@
 {
   "name": "limejs",
   "version": "1.0.0",
-  "main": "./app/frontend/index.html",
+  "main": "./src/frontend/index.html",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jshint": "~0.8.0",
     "grunt-contrib-watch": "~0.5.3",
     "load-grunt-tasks": "~0.2.1",
-    "grunt-contrib-qunit": "~0.4.0"
+    "grunt-contrib-qunit": "~0.4.0",
+    "requirejs": "~2.1.10",
+    "underscore": "~1.5.2"
   }
 }

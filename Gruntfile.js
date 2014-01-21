@@ -6,13 +6,13 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            files: ['Gruntfile.js', 'backend/**/*.js'],
+            files: ['Gruntfile.js', 'src/backend/**/*.js'],
         },
 
         watch: {
-            dev: {
-                files: ['<%= jshint.files %>', '<%= qunit.files %>'],
-                tasks: ['jshint', 'qunit'],
+            jshint: {
+                files: ['<%= jshint.files %>'],
+                tasks: ['jshint'],
                 options: {
                     spawn: false,
                 }
@@ -22,9 +22,8 @@ module.exports = function(grunt) {
 
     grunt.event.on('watch', function(action, filepath){
         grunt.config('jshint.files', filepath);
-        grunt.config('qunit.files', filepath);
     });
 
     require('load-grunt-tasks')(grunt);
-    grunt.registerTask('default', ['watch:dev']);
+    grunt.registerTask('default', ['watch:jshint']);
 };
