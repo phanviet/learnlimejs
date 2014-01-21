@@ -4,22 +4,56 @@ var utils = new Utils();
 var Region = function(a, b) {
     "use strict";
     var self = this;
-    self.a = 0;
-    self.b = 0;
+    self.a = a || 0;
+    self.b = b || 0;
 
-    if (arguments.length === 1) {
-        self.a = a;
-    } else if (arguments.length === 2) {
-        self.a = a;
-        self.b = b;
-    }
+    self.toString = function() {
+        return '(' + a + ', ' + b + ')';
+    };
 
     self.begin = function() {
-        return self.a;
+        return utils.min(self.a, self.b);
     };
 
     self.end = function() {
-        return self.b;
+        return utils.max(self.a, self.b);
+    };
+
+    self.contains = function(position) {
+        return position >= self.begin() && position < self.end();
+    };
+
+    self.empty = function() {
+        return self.a == self.b;
+    };
+
+    self.size = function() {
+        return self.end() - self.begin();
+    };
+
+    self.cover = function(other) {
+        return new Region(utils.min(self.begin(), other.begin()), utils.max(self.end(), other.end()));
+    };
+
+    self.clip = function(other) {
+        return new Region(utils.clamp(self.a, other.begin(), other.end()),
+                utils.clamp(self.b, other.begin(), other.end()));
+    };
+};
+
+var RegionSet = function() {
+    var self = this;
+    self.regions = [];
+
+    self.adjust = function(position, delta) {
+        self.regions.forEach(function(region) {
+            if (region.a > position) {
+                region.a += delta;
+            }
+            if (region.b > position) {
+                region.b += delta;
+            }
+        });
     };
 };
 
