@@ -57,9 +57,11 @@ module.exports = {
         buffer.data = "hello world";
         buffer.erase(0, 5);
         test.equals(buffer.data, " world");
+
         buffer.data = "hello world";
         buffer.erase(-1, 1);
         test.equals(buffer.data, "ello world");
+
         buffer.data = "hello world";
         buffer.erase(0, 11);
         test.equals(buffer.data, "");

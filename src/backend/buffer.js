@@ -31,6 +31,12 @@ var Buffer = function() {
     };
 
     self.erase = function(position, length) {
+        if (position < 0) {
+            position = 0;
+        }
+        if (length < 0) {
+            length = 0;
+        }
         self.data = self.data.substring(0, position)
                 + self.data.substring(position + length, self.data.length);
         self.notify(position, -length);
